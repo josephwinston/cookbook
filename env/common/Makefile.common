@@ -1,6 +1,6 @@
 # This is used by the image building script referenced below. Normally it just takes the directory name but in this
 # case we want it to be called something else.
-IMAGE_NAME=flytecookbook
+IMAGE_NAME=revealcookbook
 VERSION=$(shell ./version.sh)
 
 define PIP_COMPILE
@@ -8,8 +8,8 @@ pip-compile $(1) --upgrade --verbose
 endef
 
 # If the REGISTRY environment variable has been set, that means the image name will not just be tagged as
-#   flytecookbook:<sha> but rather,
-#   docker.io/lyft/flytecookbook:<sha> or whatever your REGISTRY is.
+#   revealcookbook:<sha> but rather,
+#   docker.io/lyft/revealcookbook:<sha> or whatever your REGISTRY is.
 ifneq ($(origin REGISTRY), undefined)
 	FULL_IMAGE_NAME = ${REGISTRY}/${IMAGE_NAME}
 else
