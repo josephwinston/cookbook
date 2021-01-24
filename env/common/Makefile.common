@@ -17,7 +17,7 @@ else
 endif
 
 # The Flyte project that we want to register under
-PROJECT=flytesnacks
+PROJECT=orchid
 
 .SILENT: help
 .PHONY: help
