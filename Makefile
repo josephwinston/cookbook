@@ -8,6 +8,13 @@ in_container_serialize_sandbox:
 register_sandbox: docker_build serialize_sandbox
 	flyte-cli register-files -i -p ${PROJECT} -d development -v ${VERSION} -h 192.168.49.2:30081 ${CURDIR}/_pb_output/*
 
+.PHONY: serialize
+serialize:
+	echo ${CURDIR}
+	mkdir ${CURDIR}/_pb_output || true
+	rm ${CURDIR}/_pb_output/* || true
+	pyflyte -c sandbox.config --pkgs gardening serialize --in-container-config-path /root/sandbox.config --local-source-root ${CURDIR} --image ${FULL_IMAGE_NAME}:${VERSION} workflows -f _pb_output/
+
 .PHONY: serialize_sandbox
 serialize_sandbox: docker_build
 	echo ${CURDIR}
