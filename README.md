@@ -25,7 +25,7 @@ Play around with the various tasks and workflows locally through just in your ID
 Getting your tasks, workflows, and launch plans to run on a Flyte platform is effectively a two-step process (though there are single commands in flytekit that combine both).  Serialization is the first step of that process, and it translates all your Flyte entities as defined in Python into Flyte IDL entities, defined in a protobuf file.
 
 1. First commit your changes. Some of the steps below default to referencing the git sha.
-1. Run `make serialize_sandbox`. This will build the image tagged with just `flytecookbook:<sha>`, no registry will be prefixed. See the image building section below for additional information.
+1. Run `make serialize_sandbox`. This will build the image tagged with just `revealcookbook:<sha>`, no registry will be prefixed. See the image building section below for additional information.
 
 Technically it is not required to build the image, and we are looking to change that, but for now it's done for two reasons:
 1. Ensure that the same libraries used when running thing on Flyte are used when translating the tasks and workflows to their protobuf counterparts.
