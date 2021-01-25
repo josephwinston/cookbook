@@ -4,6 +4,7 @@ from flytekit import task, workflow
 from flytekit.annotated.condition import conditional
 from flytekit.annotated import context_manager
 
+from Gardening import dummy
 
 @task
 def return_true(a:int) -> bool:
@@ -55,6 +56,8 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv
 
+    print (dummy.try_this())
+    
     #
     # flytekit.__version__ is 0.16.0a3
     #
