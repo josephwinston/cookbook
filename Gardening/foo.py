@@ -9,25 +9,34 @@ from flytekit.annotated import context_manager
 def return_true(a:int) -> bool:
     return True
 
-
-@workflow
-def failed(a:int) -> int:
+@task
+def failed_notify(a:int) -> None:
     ctx = context_manager.FlyteContext.current_context()
     user_context = ctx.user_space_params
     user_context.logging.info(f"failed a={a}")
+    return
+
+
+@workflow
+def failed(a:int) -> int:
+    failed_notify(a=a)
     return a
 
 
-@workflow
-def success(b:int) -> int:
+@task 
+def success_notify(b:int) -> None: 
     ctx = context_manager.FlyteContext.current_context()
     user_context = ctx.user_space_params
     user_context.logging.info(f"success b={b}")
-    return b
-
+    return
 
 @workflow
-def decompose(a:int) -> int:
+def success(b:int) -> int:
+    success_notify(b=b)
+    return b
+
+@workflow
+def decompose(a:int, b:int ) -> int:
     result = return_true(a=a)
 
     #
@@ -37,7 +46,7 @@ def decompose(a:int) -> int:
 
     return (conditional("test")
             .if_(result == True)
-            .then(success(b=a))
+            .then(success(b=b))
             .else_()
             .then(failed(a=a)))
 
@@ -50,7 +59,7 @@ def main(argv=None):
     # flytekit.__version__ is 0.16.0a3
     #
 
-    decompose(a=1)
+    print("XXXX expect 2", decompose(a=1, b=2))
 
     return
 
