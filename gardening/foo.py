@@ -4,7 +4,7 @@ from flytekit import task, workflow
 from flytekit.annotated.condition import conditional
 from flytekit.annotated import context_manager
 
-from Gardening import dummy
+from gardening.Gardening import dummy
 
 @task
 def return_true(a:int) -> bool:
